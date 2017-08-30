@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Form Test Index</title>
+  </head>
+  <style>
+  .login {
+    width:275px;
+    border-style: solid;
+    height: 300px;
+    display:inline-block;
+  }
+  </style>
+  <body>
+    <form action = "/register" method='post' class = "login">
+      <table>
+        <tr>
+          <h1>Register</h1>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type='email' name='email'></td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td><input type='text' name='first_name'></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type='text' name='last_name'></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input type='password' name='password'></td>
+        </tr>
+        <tr>
+          <td>Confirm pass:</td>
+          <td><input type='password' name='confirm'></td>
+        </tr>
+        <tr>
+          <td><input type='submit' value='create user'></td>
+        </tr>
+      </table>
+    </form>
+
+    <form action = "/login" method='post' class = "login">
+      <table>
+        <tr>
+          <h1>Login</h1>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type='email' name='loginemail'></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input type='password' name='loginpassword'></td>
+        </tr>
+        <tr>
+          <td><input type='submit' value='create user'></td>
+        </tr>
+      </table>
+    </form>
+
+    {% with error = get_flashed_messages() %}
+      {% if error %}
+      <p>{{error}}</p>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>

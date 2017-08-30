@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>Wall</title>
+  </head>
+  <style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  #wrapper {
+    width:970px;
+  }
+  #header{
+    border-bottom: 1px solid black;
+  }
+  #header h1{
+    display:inline-block;
+  }
+  #header h3{
+    margin-left: 770px;
+    vertical-align: top;
+  }
+  #messagepost{
+    margin-left: 100px;
+    margin-top: 50px;
+  }
+  #messagepost textarea {
+    width: 800px;
+  }
+#button {
+  width: 100px;
+  margin-left: 800px;
+  margin-top: 10px;
+  height: 30px;
+  color: white;
+  background-color: blue;
+}
+
+#bodymessages p{
+  width: 500px;
+  margin-left: 100px;
+  margin-top: 15px;
+}
+
+#bodymessages h4{
+  margin-left: 80px;
+}
+
+#bodymessages textarea{
+  width: 800px;
+}
+
+  </style>
+  <body>
+    <div id = wrapper>
+        <div id = header>
+            <h1>Coding Message Wall</h1>
+            <h3>Welcome (Name)</h3>
+            <form action = '/logout' method = 'post'>
+                <input type = "submit" name = "logout" value = "Logout" id= "logout" />
+            </form>
+        </div>
+        <div id = messagepost>
+            <h4>Post a Message</h4>
+            <form action = "/postmessage" method='post'>
+              <textarea rows = "5" cols = "20" name = 'message'></textarea>
+        </div>
+              <input type = 'submit' value = 'Post a Message' id = 'button'/>
+            </form>
+        <div id = "bodymessages">
+            {% for message in messages: %}
+             <h4>{{ message['first_name'] }} {{ message['last_name'] }} -- {{message['created_at']}}</h4>
+             <p>{{ message["message"] }}</p>
+             <form action = '/addcomment/{{ message["id"] }}' method = 'post'>
+               <p>Add a Comment:</p>
+               <textarea name = 'addcomment' rows = "5" cols = "20" ></textarea>
+               <input type = "submit" id = "commentbutton" name = "addcomment" value = "Comment" />
+               {% for comment in comments: %}
+                  {% if message['id'] == comment["messages_id"] %}
+                  <p>Comments:</p>
+                  <ul>
+                    <li>{{ comment['first_name'] }} has commented: {{ comment["comment"]}}</li>
+                  {% endif %}
+                {% endfor %}
+                  </ul>
+             </form>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+  </body>
+</html>
